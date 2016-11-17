@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <CalendarView Margin="33,71,0,112" Width="1100" Height="537"/>
     </Grid>
 </Page>
