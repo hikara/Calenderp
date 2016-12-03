@@ -13,23 +13,32 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Calenderp
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class SetMemoOrEvent : Page
     {
-        public MainPage()
+        public SetMemoOrEvent()
         {
             this.InitializeComponent();
         }
 
-        private void AddMemoOrEvent_Click(object sender, RoutedEventArgs e)
+        private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SetMemoOrEvent));
+            this.Frame.Navigate(typeof(MainPage));
+        }
+
+        private void memoEventSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            //TextBox textBox = new TextBox();
+            //textBox.Text = "Hi";
+            //textBox.VerticalAlignment = "Top";
+            //memoEventGrid.RowDefinitions.Add(new RowDefinition());
+            //memoEventGrid.Children.Add(textBox);
         }
     }
 }

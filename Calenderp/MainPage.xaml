@@ -11,8 +11,7 @@
             <CommandBar.Content>
                 <Grid/>
             </CommandBar.Content>
-            <AppBarButton Icon="Accept" Label="appbarbutton"/>
-            <AppBarButton Icon="Cancel" Label="appbarbutton"/>
+            <AppBarButton Icon="Add" Label="Add Memo or Event" Name="AddMemoOrEvent" Click="AddMemoOrEvent_Click"/>
         </CommandBar>
     </Page.BottomAppBar>
 
