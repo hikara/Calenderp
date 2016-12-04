@@ -16,7 +16,7 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#438987" Name="settingsPageGrid">
 
     </Grid>
 </Page>
