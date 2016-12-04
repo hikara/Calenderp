@@ -33,7 +33,7 @@ namespace Calenderp
             this.Frame.Navigate(typeof(SetMemoOrEvent));
         }
 
-        private void addMemo_Click(object sender, RoutedEventArgs e)
+        private void addTitle()
         {
             TextBlock titleLabel = new TextBlock();
             titleLabel.Text = "Memo Title:";
@@ -44,7 +44,10 @@ namespace Calenderp
             titleLabel.Width = 150;
             titleLabel.Margin = new Thickness(5, 5, 5, 5);
             addMemoEventGrid.Children.Add(titleLabel);
+        }
 
+        private void addUserGivenTitle()
+        {
             TextBox userGivenTitle = new TextBox();
             userGivenTitle.Text = "Enter A Title For Your Memo";
             userGivenTitle.HorizontalAlignment = HorizontalAlignment.Right;
@@ -53,7 +56,10 @@ namespace Calenderp
             userGivenTitle.Width = 475;
             userGivenTitle.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             addMemoEventGrid.Children.Add(userGivenTitle);
+        }
 
+        private void addDescriptionlabel()
+        {
             TextBlock descriptionLabel = new TextBlock();
             descriptionLabel.Text = "Memo:";
             descriptionLabel.HorizontalAlignment = HorizontalAlignment.Left;
@@ -63,7 +69,10 @@ namespace Calenderp
             descriptionLabel.Width = 150;
             descriptionLabel.Margin = new Thickness(5, 55, 5, 5);
             addMemoEventGrid.Children.Add(descriptionLabel);
+        }
 
+        private void addUserGivenMemo()
+        {
             TextBox userGivenMemo = new TextBox();
             userGivenMemo.Text = "Memo";
             userGivenMemo.HorizontalAlignment = HorizontalAlignment.Right;
@@ -73,6 +82,14 @@ namespace Calenderp
             userGivenMemo.Margin = new Thickness(5, 55, 5, 5);
             userGivenMemo.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             addMemoEventGrid.Children.Add(userGivenMemo);
+        }
+
+        private void addMemo_Click(object sender, RoutedEventArgs e)
+        {
+            addTitle();
+            addUserGivenTitle();
+            addDescriptionlabel();
+            addUserGivenMemo();
         }
 
         private void addEvent_Click(object sender, RoutedEventArgs e)
