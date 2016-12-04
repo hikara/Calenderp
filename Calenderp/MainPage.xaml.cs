@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Diagnostics;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -13,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Globalization;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -23,14 +25,40 @@ namespace Calenderp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public int selectedYear = Int32.MaxValue;
+        public int selectedMonth = Int32.MaxValue;
+        public int selectedDay = Int32.MaxValue;
+
         public MainPage()
         {
             this.InitializeComponent();
+            DateTime localDate = DateTime.Now;
+            var culture = new CultureInfo("en-US");
+            setSelectedDate(localDate.ToString(culture));
         }
 
         private void AddMemoOrEvent_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(SetMemoOrEvent));
+        }
+
+        private void addCalendarPicker(string headerType, int year, int month, int day)
+        {
+            CalendarDatePicker arrivalCalendarDatePicker = new CalendarDatePicker();
+            arrivalCalendarDatePicker.Header = headerType + " date";
+        }
+
+        private void setSelectedDate(string selectedDate)
+        {
+            int monthDayDelimeter = selectedDate.IndexOf('/');
+            selectedMonth = Convert.ToInt32(selectedDate.Substring(0, selectedDate.IndexOf('/')));
+            selectedDate = selectedDate.Substring(monthDayDelimeter + 1);
+
+            int dayYearDelimeter = selectedDate.IndexOf('/');
+            selectedDay = Convert.ToInt32(selectedDate.Substring(0, dayYearDelimeter));
+            selectedDate = selectedDate.Substring(dayYearDelimeter + 1);
+
+            selectedYear = Convert.ToInt32(selectedDate.Substring(0, 4));
         }
 
         private void addTitle(string titleText)
@@ -109,6 +137,16 @@ namespace Calenderp
 
             addTitle("Event Title:");
             addUserGivenTitle("Event");
+        }
+
+        private void calenderpCalendarView_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
+        {
+            IList<DateTimeOffset> dates = calenderpCalendarView.SelectedDates;
+            foreach (DateTimeOffset date in dates)
+            {
+                string selectedDate = date.ToString();
+                setSelectedDate(selectedDate);
+            }
         }
     }
 }
