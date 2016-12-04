@@ -16,12 +16,12 @@
     </Page.BottomAppBar>
 
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="calendarViewGrid">
+    <Grid Background="#438987" Name="calendarViewGrid">
         <CalendarView Margin="800,33,0,0" Width="900" VerticalAlignment="Top" Height="900"/>
-        <Button x:Name="addMemo" Content="Add Memo" HorizontalAlignment="Left" Margin="75,58,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="addMemo_Click"/>
-        <Button x:Name="addEvent" Content="Add Event" HorizontalAlignment="Left" Margin="250,58,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="addEvent_Click"/>
+        <Button x:Name="addMemo" Content="Add Memo" HorizontalAlignment="Left" Margin="75,58,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="addMemo_Click" Background="#a5e2e0"/>
+        <Button x:Name="addEvent" Content="Add Event" HorizontalAlignment="Left" Margin="250,58,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="addEvent_Click" Background="#a5e2e0"/>
 
-        <Grid Background="#eeeeee" Margin="75,182,1185,147" Name="addMemoEventGrid">
+        <Grid Background="#507f7d" Margin="75,182,1185,147" Name="addMemoEventGrid">
             <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="500" />
