@@ -26,5 +26,15 @@ namespace Calenderp
         {
             this.InitializeComponent();
         }
+
+        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SettingsPage));
+        }
+
+        private void calendarButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
+        }
     }
 }
