@@ -17,11 +17,9 @@
 
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <CalendarView Margin="0,0,0,255" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="180,932,0,0" VerticalAlignment="Top"/>
-
-
-
+        <CalendarView Margin="800,33,0,0" Width="900" VerticalAlignment="Top" Height="900"/>
+        <Button x:Name="addMemo" Content="Add Memo" HorizontalAlignment="Left" Margin="75,58,0,0" VerticalAlignment="Top" Width="100" Height="32"/>
+        <Button x:Name="addEvent" Content="Add Event" HorizontalAlignment="Left" Margin="250,58,0,0" VerticalAlignment="Top" Width="100" Height="32"/>
     </Grid>
 
 </Page>
