@@ -37,11 +37,6 @@ namespace Calenderp
             setSelectedDate(localDate.ToString(culture));
         }
 
-        private void AddMemoOrEvent_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(SetMemoOrEvent));
-        }
-
         private void addCalendarPicker(string headerType, int year, int month, int day)
         {
             CalendarDatePicker addMemoEventCalendar = new CalendarDatePicker();
@@ -160,11 +155,17 @@ namespace Calenderp
 
         private void calenderpCalendarView_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
         {
+            //Debug.WriteLine(args.AddedDates.ToArray());
+            //foreach (DateTimeOffset daa in args.AddedDates.ToArray())
+            //{
+            //    Debug.WriteLine(daa.ToString());
+            //}
             if (datePickerGrid.Children.Count > 0)
             {
                 datePickerGrid.Children.RemoveAt(0);
                 addCalendarPicker(selectedButton, selectedYear, selectedMonth, selectedDay);
             }
+            
             IList<DateTimeOffset> dates = calenderpCalendarView.SelectedDates;
             foreach (DateTimeOffset date in dates)
             {

@@ -11,7 +11,8 @@
             <CommandBar.Content>
                 <Grid/>
             </CommandBar.Content>
-            <AppBarButton Icon="Add" Label="Add Memo or Event" Name="AddMemoOrEvent" Click="AddMemoOrEvent_Click"/>
+            <AppBarButton Icon="Calendar" Label="Calendar" Name="calendarButton"/>
+            <AppBarButton Icon="Setting" Label="Customize your layout" Name="settingsButton"/>
         </CommandBar>
     </Page.BottomAppBar>
 
