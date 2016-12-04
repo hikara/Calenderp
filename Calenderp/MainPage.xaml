@@ -13,6 +13,11 @@
             </CommandBar.Content>
             <AppBarButton Icon="Calendar" Label="Calendar" Name="calendarButton"/>
             <AppBarButton Icon="Setting" Label="Customize your layout" Name="settingsButton"/>
+            <AppBarButton Label="About" Icon="AlignCenter">
+                <!--<AppBarButton.Icon>
+                    <BitmapIcon UriSource="/Assets/about.png"/>
+                </AppBarButton.Icon>-->
+            </AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
 
