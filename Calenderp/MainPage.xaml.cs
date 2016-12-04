@@ -33,10 +33,10 @@ namespace Calenderp
             this.Frame.Navigate(typeof(SetMemoOrEvent));
         }
 
-        private void addTitle()
+        private void addTitle(string titleText)
         {
             TextBlock titleLabel = new TextBlock();
-            titleLabel.Text = "Memo Title:";
+            titleLabel.Text = titleText;
             titleLabel.HorizontalAlignment = HorizontalAlignment.Left;
             titleLabel.VerticalAlignment = VerticalAlignment.Top;
             titleLabel.FontSize = 16;
@@ -46,10 +46,10 @@ namespace Calenderp
             addMemoEventGrid.Children.Add(titleLabel);
         }
 
-        private void addUserGivenTitle()
+        private void addUserGivenTitle(string titleType)
         {
             TextBox userGivenTitle = new TextBox();
-            userGivenTitle.Text = "Enter A Title For Your Memo";
+            userGivenTitle.Text = "Enter A Title For Your " + titleType;
             userGivenTitle.HorizontalAlignment = HorizontalAlignment.Right;
             userGivenTitle.VerticalAlignment = VerticalAlignment.Top;
             userGivenTitle.Height = 30;
@@ -86,15 +86,20 @@ namespace Calenderp
 
         private void addMemo_Click(object sender, RoutedEventArgs e)
         {
-            addTitle();
-            addUserGivenTitle();
+            //addMemoEventGrid = new Grid();
+            //addMemoEventGrid.Background = new SolidColorBrush(Color.FromArgb(255, 85, 127, 125));
+            //addMemoEventGrid.Margin = new Thickness(75, 182, 1185, 147);
+            //addMemoEventGrid.Name = "addMemoEventGrid";
+            addTitle("Memo Title:");
+            addUserGivenTitle("Memo");
             addDescriptionlabel();
             addUserGivenMemo();
         }
 
         private void addEvent_Click(object sender, RoutedEventArgs e)
         {
-
+            addTitle("Event Title:");
+            addUserGivenTitle("Event");
         }
     }
 }
