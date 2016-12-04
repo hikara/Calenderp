@@ -23,6 +23,7 @@
 
         <Grid Background="#507f7d" Margin="75,182,1185,147" Name="addMemoEventGrid">
         </Grid>
+        <Grid Background="#507f7d" Margin="75,182,1185,700" Name="datePickerGrid"></Grid>
     </Grid>
 
 </Page>

@@ -25,10 +25,10 @@ namespace Calenderp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public int selectedYear = Int32.MaxValue;
-        public int selectedMonth = Int32.MaxValue;
-        public int selectedDay = Int32.MaxValue;
-
+        public int selectedYear;
+        public int selectedMonth;
+        public int selectedDay;
+        public string selectedButton = "";
         public MainPage()
         {
             this.InitializeComponent();
@@ -44,8 +44,13 @@ namespace Calenderp
 
         private void addCalendarPicker(string headerType, int year, int month, int day)
         {
-            CalendarDatePicker arrivalCalendarDatePicker = new CalendarDatePicker();
-            arrivalCalendarDatePicker.Header = headerType + " date";
+            CalendarDatePicker addMemoEventCalendar = new CalendarDatePicker();
+            addMemoEventCalendar.Date = new DateTime(year, month, day);
+            addMemoEventCalendar.Header = headerType + " date";
+            addMemoEventCalendar.HorizontalAlignment = HorizontalAlignment.Left;
+            addMemoEventCalendar.VerticalAlignment = VerticalAlignment.Top;
+            //addMemoEventCalendar.Margin = new Thickness(5, 5, 5, 5);
+            datePickerGrid.Children.Add(addMemoEventCalendar);
         }
 
         private void setSelectedDate(string selectedDate)
@@ -70,7 +75,7 @@ namespace Calenderp
             titleLabel.FontSize = 16;
             titleLabel.Height = 30;
             titleLabel.Width = 150;
-            titleLabel.Margin = new Thickness(5, 55, 5, 5);
+            titleLabel.Margin = new Thickness(5, 75, 5, 5);
             addMemoEventGrid.Children.Add(titleLabel);
         }
 
@@ -82,7 +87,7 @@ namespace Calenderp
             userGivenTitle.VerticalAlignment = VerticalAlignment.Top;
             userGivenTitle.Height = 30;
             userGivenTitle.Width = 475;
-            userGivenTitle.Margin = new Thickness(5, 55, 5, 5);
+            userGivenTitle.Margin = new Thickness(5, 75, 5, 5);
             userGivenTitle.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             addMemoEventGrid.Children.Add(userGivenTitle);
         }
@@ -96,7 +101,7 @@ namespace Calenderp
             descriptionLabel.FontSize = 16;
             descriptionLabel.Height = 30;
             descriptionLabel.Width = 150;
-            descriptionLabel.Margin = new Thickness(5, 105, 5, 5);
+            descriptionLabel.Margin = new Thickness(5, 125, 5, 5);
             addMemoEventGrid.Children.Add(descriptionLabel);
         }
 
@@ -106,21 +111,28 @@ namespace Calenderp
             userGivenMemo.Text = "Memo";
             userGivenMemo.HorizontalAlignment = HorizontalAlignment.Right;
             userGivenMemo.VerticalAlignment = VerticalAlignment.Top;
-            userGivenMemo.Height = 500;
+            userGivenMemo.Height = 485;
             userGivenMemo.Width = 475;
-            userGivenMemo.Margin = new Thickness(5, 105, 5, 5);
+            userGivenMemo.Margin = new Thickness(5, 125, 5, 5);
             userGivenMemo.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             addMemoEventGrid.Children.Add(userGivenMemo);
         }
 
         private void addMemo_Click(object sender, RoutedEventArgs e)
         {
+            selectedButton = "Memo";
             int count = addMemoEventGrid.Children.Count();
             for (int i = 0; i < count; i++)
             {
                 addMemoEventGrid.Children.RemoveAt(0);
             }
 
+            if (datePickerGrid.Children.Count > 0)
+            {
+                datePickerGrid.Children.RemoveAt(0);
+            }
+
+            addCalendarPicker("Memo", selectedYear, selectedMonth, selectedDay);
             addTitle("Memo Title:");
             addUserGivenTitle("Memo");
             addDescriptionlabel();
@@ -129,18 +141,30 @@ namespace Calenderp
 
         private void addEvent_Click(object sender, RoutedEventArgs e)
         {
+            selectedButton = "Event";
             int count = addMemoEventGrid.Children.Count();
             for (int i = 0; i < count; i++)
             {
                 addMemoEventGrid.Children.RemoveAt(0);
             }
 
+            if (datePickerGrid.Children.Count > 0)
+            {
+                datePickerGrid.Children.RemoveAt(0);
+            }
+
+            addCalendarPicker("Event", selectedYear, selectedMonth, selectedDay);
             addTitle("Event Title:");
             addUserGivenTitle("Event");
         }
 
         private void calenderpCalendarView_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
         {
+            if (datePickerGrid.Children.Count > 0)
+            {
+                datePickerGrid.Children.RemoveAt(0);
+                addCalendarPicker(selectedButton, selectedYear, selectedMonth, selectedDay);
+            }
             IList<DateTimeOffset> dates = calenderpCalendarView.SelectedDates;
             foreach (DateTimeOffset date in dates)
             {
