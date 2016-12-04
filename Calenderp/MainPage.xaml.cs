@@ -34,9 +34,13 @@ namespace Calenderp
 
         private void addMemo_Click(object sender, RoutedEventArgs e)
         {
-            TextBox newNote = new TextBox();
-            newNote.Text = "Enter your text";
-            calendarViewGrid.Children.Add(newNote);
+            TextBlock titleLabel = new TextBlock();
+            titleLabel.Text = "Title";
+            addMemoEventGrid.Children.Add(titleLabel);
+
+            TextBox userGivenTitle = new TextBox();
+            userGivenTitle.Text = "Enter your text";
+            addMemoEventGrid.Children.Add(userGivenTitle);
         }
 
         private void addEvent_Click(object sender, RoutedEventArgs e)

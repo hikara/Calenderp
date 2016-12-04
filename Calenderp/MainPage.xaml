@@ -21,8 +21,8 @@
         <Button x:Name="addMemo" Content="Add Memo" HorizontalAlignment="Left" Margin="75,58,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="addMemo_Click"/>
         <Button x:Name="addEvent" Content="Add Event" HorizontalAlignment="Left" Margin="250,58,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="addEvent_Click"/>
 
-        <Grid Background="#eeeeee" Margin="75,182,1185,147">
-            <Grid.ColumnDefinitions>
+        <Grid Background="#eeeeee" Margin="75,182,1185,147" Name="addMemoEventGrid">
+            <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="500" />
             </Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            </Grid.RowDefinitions>-->
         </Grid>
 
 
