@@ -16,10 +16,26 @@
     </Page.BottomAppBar>
 
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="calendarViewGrid">
         <CalendarView Margin="800,33,0,0" Width="900" VerticalAlignment="Top" Height="900"/>
-        <Button x:Name="addMemo" Content="Add Memo" HorizontalAlignment="Left" Margin="75,58,0,0" VerticalAlignment="Top" Width="100" Height="32"/>
-        <Button x:Name="addEvent" Content="Add Event" HorizontalAlignment="Left" Margin="250,58,0,0" VerticalAlignment="Top" Width="100" Height="32"/>
+        <Button x:Name="addMemo" Content="Add Memo" HorizontalAlignment="Left" Margin="75,58,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="addMemo_Click"/>
+        <Button x:Name="addEvent" Content="Add Event" HorizontalAlignment="Left" Margin="250,58,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="addEvent_Click"/>
+
+        <Grid Background="#eeeeee" Margin="75,182,1185,147">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="500" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+
+
     </Grid>
 
 </Page>

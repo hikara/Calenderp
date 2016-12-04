@@ -31,5 +31,17 @@ namespace Calenderp
         {
             this.Frame.Navigate(typeof(SetMemoOrEvent));
         }
+
+        private void addMemo_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox newNote = new TextBox();
+            newNote.Text = "Enter your text";
+            calendarViewGrid.Children.Add(newNote);
+        }
+
+        private void addEvent_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
