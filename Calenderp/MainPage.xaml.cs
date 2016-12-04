@@ -42,7 +42,7 @@ namespace Calenderp
             titleLabel.FontSize = 16;
             titleLabel.Height = 30;
             titleLabel.Width = 150;
-            titleLabel.Margin = new Thickness(5, 5, 5, 5);
+            titleLabel.Margin = new Thickness(5, 55, 5, 5);
             addMemoEventGrid.Children.Add(titleLabel);
         }
 
@@ -54,6 +54,7 @@ namespace Calenderp
             userGivenTitle.VerticalAlignment = VerticalAlignment.Top;
             userGivenTitle.Height = 30;
             userGivenTitle.Width = 475;
+            userGivenTitle.Margin = new Thickness(5, 55, 5, 5);
             userGivenTitle.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             addMemoEventGrid.Children.Add(userGivenTitle);
         }
@@ -67,7 +68,7 @@ namespace Calenderp
             descriptionLabel.FontSize = 16;
             descriptionLabel.Height = 30;
             descriptionLabel.Width = 150;
-            descriptionLabel.Margin = new Thickness(5, 55, 5, 5);
+            descriptionLabel.Margin = new Thickness(5, 105, 5, 5);
             addMemoEventGrid.Children.Add(descriptionLabel);
         }
 
@@ -77,19 +78,21 @@ namespace Calenderp
             userGivenMemo.Text = "Memo";
             userGivenMemo.HorizontalAlignment = HorizontalAlignment.Right;
             userGivenMemo.VerticalAlignment = VerticalAlignment.Top;
-            userGivenMemo.Height = 600;
+            userGivenMemo.Height = 500;
             userGivenMemo.Width = 475;
-            userGivenMemo.Margin = new Thickness(5, 55, 5, 5);
+            userGivenMemo.Margin = new Thickness(5, 105, 5, 5);
             userGivenMemo.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             addMemoEventGrid.Children.Add(userGivenMemo);
         }
 
         private void addMemo_Click(object sender, RoutedEventArgs e)
         {
-            //addMemoEventGrid = new Grid();
-            //addMemoEventGrid.Background = new SolidColorBrush(Color.FromArgb(255, 85, 127, 125));
-            //addMemoEventGrid.Margin = new Thickness(75, 182, 1185, 147);
-            //addMemoEventGrid.Name = "addMemoEventGrid";
+            int count = addMemoEventGrid.Children.Count();
+            for (int i = 0; i < count; i++)
+            {
+                addMemoEventGrid.Children.RemoveAt(0);
+            }
+
             addTitle("Memo Title:");
             addUserGivenTitle("Memo");
             addDescriptionlabel();
@@ -98,6 +101,12 @@ namespace Calenderp
 
         private void addEvent_Click(object sender, RoutedEventArgs e)
         {
+            int count = addMemoEventGrid.Children.Count();
+            for (int i = 0; i < count; i++)
+            {
+                addMemoEventGrid.Children.RemoveAt(0);
+            }
+
             addTitle("Event Title:");
             addUserGivenTitle("Event");
         }
