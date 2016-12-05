@@ -27,10 +27,12 @@
         <Button x:Name="addMemo" Content="Add Memo" HorizontalAlignment="Left" Margin="75,116,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="addMemo_Click" Background="#a5e2e0"/>
         <Button x:Name="addEvent" Content="Add Event" HorizontalAlignment="Left" Margin="238,116,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="addEvent_Click" Background="#a5e2e0" RenderTransformOrigin="0.268,0.409"/>
 
-        <Grid Background="#507f7d" Margin="75,182,1185,147" Name="addMemoEventGrid">
+        <Grid Background="#507f7d" Margin="75,182,1185,444" Name="addMemoEventGrid">
         </Grid>
         <Grid Background="#507f7d" Margin="75,182,1185,700" Name="datePickerGrid"></Grid>
         <TextBlock x:Name="calenDerpTitle" HorizontalAlignment="Left" Margin="75,33,0,0" TextWrapping="Wrap" Text="Calenderp" VerticalAlignment="Top" Height="83" Width="601" FontSize="60" FontFamily="Lucida Sans"/>
+        <Grid Background="#507f7d" Margin="75,601,1185,79" Name="dateSelectedGrid"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="75,550,0,0" TextWrapping="Wrap" Text="Currently Selected Date:" VerticalAlignment="Top" Height="46" Width="364" FontFamily="Lucida Sans" FontSize="30"/>
     </Grid>
 
 </Page>

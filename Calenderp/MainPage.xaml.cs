@@ -118,10 +118,11 @@ namespace Calenderp
             userGivenMemo.Text = "Memo";
             userGivenMemo.HorizontalAlignment = HorizontalAlignment.Left;
             userGivenMemo.VerticalAlignment = VerticalAlignment.Top;
-            userGivenMemo.Height = 385;
+            userGivenMemo.Height = 150;
             userGivenMemo.Width = 405;
             userGivenMemo.Margin = new Thickness(105, 125, 5, 5);
             userGivenMemo.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
+            userGivenMemo.TextWrapping = TextWrapping.Wrap;
             addMemoEventGrid.Children.Add(userGivenMemo);
         }
 
