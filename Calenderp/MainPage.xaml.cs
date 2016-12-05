@@ -29,6 +29,8 @@ namespace Calenderp
         public int selectedMonth;
         public int selectedDay;
         public string selectedButton = "";
+        private string userSubmittedTitle = "No Title Submitted";
+        private string userSubmittedMemoText = "No Memo Submitted";
         public MainPage()
         {
             this.InitializeComponent();
@@ -97,6 +99,13 @@ namespace Calenderp
             userGivenTitle.Margin = new Thickness(105, 75, 5, 5);
             userGivenTitle.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             addMemoEventGrid.Children.Add(userGivenTitle);
+            userGivenTitle.TextChanged += userGivenTitle_TextChanged;
+        }
+
+        private void userGivenTitle_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox userSubmittedChange = (TextBox)sender;
+            userSubmittedTitle = userSubmittedChange.Text;
         }
 
         private void addDescriptionlabel()
@@ -160,19 +169,19 @@ namespace Calenderp
             submitButton.Width = 130;
             submitButton.Background = new SolidColorBrush(Color.FromArgb(255, 165, 226, 224));
             addMemoEventGrid.Children.Add(submitButton);
-            submitButton.Click += SubmitButton_Click;
+            submitButton.Click += submitButton_Click;
         }
 
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        private void submitButton_Click(object sender, RoutedEventArgs e)
         {
             TextBlock descriptionLabel2 = new TextBlock();
             //descriptionLabel2.Text = addMemoEventGrid.userGivenMemo.Text;
-            descriptionLabel2.Text = "meh";
+            descriptionLabel2.Text = userSubmittedTitle;
             descriptionLabel2.HorizontalAlignment = HorizontalAlignment.Left;
             descriptionLabel2.VerticalAlignment = VerticalAlignment.Top;
             descriptionLabel2.FontSize = 16;
             descriptionLabel2.Height = 30;
-            descriptionLabel2.Width = 150;
+            descriptionLabel2.Width = 405;
             descriptionLabel2.Margin = new Thickness(5, 125, 5, 5);
             dateSelectedGrid.Children.Add(descriptionLabel2);
         }
