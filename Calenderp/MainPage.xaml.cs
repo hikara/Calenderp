@@ -181,6 +181,7 @@ namespace Calenderp
 
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
+            //Save Title etc....
             TextBlock descriptionLabel2 = new TextBlock();
             descriptionLabel2.Text = userSubmittedTitle;
             descriptionLabel2.HorizontalAlignment = HorizontalAlignment.Left;
@@ -191,15 +192,18 @@ namespace Calenderp
             descriptionLabel2.Margin = new Thickness(5, 125, 5, 5);
             dateSelectedGrid.Children.Add(descriptionLabel2);
 
-            TextBlock descriptionLabel3 = new TextBlock();
-            descriptionLabel3.Text = userSubmittedMemoText;
-            descriptionLabel3.HorizontalAlignment = HorizontalAlignment.Left;
-            descriptionLabel3.VerticalAlignment = VerticalAlignment.Top;
-            descriptionLabel3.FontSize = 16;
-            descriptionLabel3.Height = 30;
-            descriptionLabel3.Width = 405;
-            descriptionLabel3.Margin = new Thickness(5, 225, 5, 5);
-            dateSelectedGrid.Children.Add(descriptionLabel3);
+            if (selectedButton == "Memo")
+            {
+                TextBlock descriptionLabel3 = new TextBlock();
+                descriptionLabel3.Text = userSubmittedMemoText;
+                descriptionLabel3.HorizontalAlignment = HorizontalAlignment.Left;
+                descriptionLabel3.VerticalAlignment = VerticalAlignment.Top;
+                descriptionLabel3.FontSize = 16;
+                descriptionLabel3.Height = 30;
+                descriptionLabel3.Width = 405;
+                descriptionLabel3.Margin = new Thickness(5, 225, 5, 5);
+                dateSelectedGrid.Children.Add(descriptionLabel3);
+            }
         }
 
         private void removeChildren(Grid grid)
