@@ -160,6 +160,26 @@ namespace Calenderp
             submitButton.Width = 130;
             submitButton.Background = new SolidColorBrush(Color.FromArgb(255, 165, 226, 224));
             addMemoEventGrid.Children.Add(submitButton);
+            submitButton.Click += SubmitButton_Click;
+        }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextBlock descriptionLabel2 = new TextBlock();
+            //descriptionLabel2.Text = addMemoEventGrid.userGivenMemo.Text;
+            descriptionLabel2.Text = "meh";
+            descriptionLabel2.HorizontalAlignment = HorizontalAlignment.Left;
+            descriptionLabel2.VerticalAlignment = VerticalAlignment.Top;
+            descriptionLabel2.FontSize = 16;
+            descriptionLabel2.Height = 30;
+            descriptionLabel2.Width = 150;
+            descriptionLabel2.Margin = new Thickness(5, 125, 5, 5);
+            dateSelectedGrid.Children.Add(descriptionLabel2);
+        }
+
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void removeChildren(Grid grid)
