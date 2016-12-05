@@ -104,8 +104,8 @@ namespace Calenderp
 
         private void userGivenTitle_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBox userSubmittedChange = (TextBox)sender;
-            userSubmittedTitle = userSubmittedChange.Text;
+            TextBox userSubmittedChangeTitle = (TextBox)sender;
+            userSubmittedTitle = userSubmittedChangeTitle.Text;
         }
 
         private void addDescriptionlabel()
@@ -133,6 +133,13 @@ namespace Calenderp
             userGivenMemo.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             userGivenMemo.TextWrapping = TextWrapping.Wrap;
             addMemoEventGrid.Children.Add(userGivenMemo);
+            userGivenMemo.TextChanged += userGivenMemo_TextChanged;
+        }
+
+        private void userGivenMemo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox userSubmittedChangeMemo = (TextBox)sender;
+            userSubmittedMemoText = userSubmittedChangeMemo.Text;
         }
 
         private void addTimePickerText()
@@ -175,7 +182,6 @@ namespace Calenderp
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
             TextBlock descriptionLabel2 = new TextBlock();
-            //descriptionLabel2.Text = addMemoEventGrid.userGivenMemo.Text;
             descriptionLabel2.Text = userSubmittedTitle;
             descriptionLabel2.HorizontalAlignment = HorizontalAlignment.Left;
             descriptionLabel2.VerticalAlignment = VerticalAlignment.Top;
@@ -184,6 +190,16 @@ namespace Calenderp
             descriptionLabel2.Width = 405;
             descriptionLabel2.Margin = new Thickness(5, 125, 5, 5);
             dateSelectedGrid.Children.Add(descriptionLabel2);
+
+            TextBlock descriptionLabel3 = new TextBlock();
+            descriptionLabel3.Text = userSubmittedMemoText;
+            descriptionLabel3.HorizontalAlignment = HorizontalAlignment.Left;
+            descriptionLabel3.VerticalAlignment = VerticalAlignment.Top;
+            descriptionLabel3.FontSize = 16;
+            descriptionLabel3.Height = 30;
+            descriptionLabel3.Width = 405;
+            descriptionLabel3.Margin = new Thickness(5, 225, 5, 5);
+            dateSelectedGrid.Children.Add(descriptionLabel3);
         }
 
         private void submitButton_Click(object sender, EventArgs e)
