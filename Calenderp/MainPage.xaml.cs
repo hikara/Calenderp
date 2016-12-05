@@ -113,9 +113,8 @@ namespace Calenderp
             addMemoEventGrid.Children.Add(userGivenMemo);
         }
 
-        private void addMemo_Click(object sender, RoutedEventArgs e)
+        private void removeChildren()
         {
-            selectedButton = "Memo";
             int count = addMemoEventGrid.Children.Count();
             for (int i = 0; i < count; i++)
             {
@@ -126,7 +125,12 @@ namespace Calenderp
             {
                 datePickerGrid.Children.RemoveAt(0);
             }
+        }
 
+        private void addMemo_Click(object sender, RoutedEventArgs e)
+        {
+            selectedButton = "Memo";
+            removeChildren();
             addCalendarPicker("Memo", selectedYear, selectedMonth, selectedDay);
             addTitle("Memo Title:");
             addUserGivenTitle("Memo");
@@ -137,17 +141,7 @@ namespace Calenderp
         private void addEvent_Click(object sender, RoutedEventArgs e)
         {
             selectedButton = "Event";
-            int count = addMemoEventGrid.Children.Count();
-            for (int i = 0; i < count; i++)
-            {
-                addMemoEventGrid.Children.RemoveAt(0);
-            }
-
-            if (datePickerGrid.Children.Count > 0)
-            {
-                datePickerGrid.Children.RemoveAt(0);
-            }
-
+            removeChildren();
             addCalendarPicker("Event", selectedYear, selectedMonth, selectedDay);
             addTitle("Event Title:");
             addUserGivenTitle("Event");
