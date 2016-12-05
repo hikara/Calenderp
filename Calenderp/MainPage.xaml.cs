@@ -125,12 +125,27 @@ namespace Calenderp
             addMemoEventGrid.Children.Add(userGivenMemo);
         }
 
+        private void addTimePickerText()
+        {
+            TextBlock calendarPickerText = new TextBlock();
+            calendarPickerText.Text = "Event Time:";
+            calendarPickerText.HorizontalAlignment = HorizontalAlignment.Left;
+            calendarPickerText.VerticalAlignment = VerticalAlignment.Top;
+            calendarPickerText.FontSize = 16;
+            calendarPickerText.Height = 30;
+            calendarPickerText.Width = 150;
+            calendarPickerText.Margin = new Thickness(225, 6, 5, 5);
+            datePickerGrid.Children.Add(calendarPickerText);
+        }
+
         private void addTimepicker()
         {
             TimePicker eventTime = new TimePicker();
             eventTime.HorizontalAlignment = HorizontalAlignment.Left;
             eventTime.VerticalAlignment = VerticalAlignment.Top;
-            eventTime.Margin = new Thickness(305, 125, 5, 5);
+            eventTime.FontSize = 16;
+            eventTime.Margin = new Thickness(315, 5, 5, 5);
+            datePickerGrid.Children.Add(eventTime);
         }
 
         private void removeChildren(Grid grid)
@@ -164,6 +179,8 @@ namespace Calenderp
             addCalendarPickerText("Event Date:");
             addTitle("Event Title:");
             addUserGivenTitle("Event");
+            addTimepicker();
+            addTimePickerText();
         }
 
         private void calenderpCalendarView_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
@@ -178,6 +195,11 @@ namespace Calenderp
                 removeChildren(datePickerGrid);
                 addCalendarPicker(selectedYear, selectedMonth, selectedDay);
                 addCalendarPickerText(selectedButton + " Date:");
+                if (selectedButton == "Event")
+                {
+                    addTimepicker();
+                    addTimePickerText();
+                }
             }
             
             IList<DateTimeOffset> dates = calenderpCalendarView.SelectedDates;
