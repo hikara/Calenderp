@@ -37,14 +37,27 @@ namespace Calenderp
             setSelectedDate(localDate.ToString(culture));
         }
 
+        private void addCalendarPickerText(string calendarPickerType)
+        {
+            TextBlock calendarPickerText = new TextBlock();
+            calendarPickerText.Text = calendarPickerType;
+            calendarPickerText.HorizontalAlignment = HorizontalAlignment.Left;
+            calendarPickerText.VerticalAlignment = VerticalAlignment.Top;
+            calendarPickerText.FontSize = 16;
+            calendarPickerText.Height = 30;
+            calendarPickerText.Width = 150;
+            calendarPickerText.Margin = new Thickness(5, 5, 5, 5);
+            datePickerGrid.Children.Add(calendarPickerText);
+        }
+
         private void addCalendarPicker(string headerType, int year, int month, int day)
         {
             CalendarDatePicker addMemoEventCalendar = new CalendarDatePicker();
             addMemoEventCalendar.Date = new DateTime(year, month, day);
-            addMemoEventCalendar.Header = headerType + " date";
+            //addMemoEventCalendar.Header = headerType + " date";
             addMemoEventCalendar.HorizontalAlignment = HorizontalAlignment.Left;
             addMemoEventCalendar.VerticalAlignment = VerticalAlignment.Top;
-            //addMemoEventCalendar.Margin = new Thickness(5, 5, 5, 5);
+            addMemoEventCalendar.Margin = new Thickness(105, 5, 5, 5);
             datePickerGrid.Children.Add(addMemoEventCalendar);
         }
 
@@ -78,11 +91,11 @@ namespace Calenderp
         {
             TextBox userGivenTitle = new TextBox();
             userGivenTitle.Text = "Enter A Title For Your " + titleType;
-            userGivenTitle.HorizontalAlignment = HorizontalAlignment.Right;
+            userGivenTitle.HorizontalAlignment = HorizontalAlignment.Left;
             userGivenTitle.VerticalAlignment = VerticalAlignment.Top;
             userGivenTitle.Height = 30;
-            userGivenTitle.Width = 475;
-            userGivenTitle.Margin = new Thickness(5, 75, 5, 5);
+            userGivenTitle.Width = 405;
+            userGivenTitle.Margin = new Thickness(105, 75, 5, 5);
             userGivenTitle.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             addMemoEventGrid.Children.Add(userGivenTitle);
         }
@@ -104,13 +117,19 @@ namespace Calenderp
         {
             TextBox userGivenMemo = new TextBox();
             userGivenMemo.Text = "Memo";
-            userGivenMemo.HorizontalAlignment = HorizontalAlignment.Right;
+            userGivenMemo.HorizontalAlignment = HorizontalAlignment.Left;
             userGivenMemo.VerticalAlignment = VerticalAlignment.Top;
-            userGivenMemo.Height = 485;
-            userGivenMemo.Width = 475;
-            userGivenMemo.Margin = new Thickness(5, 125, 5, 5);
+            userGivenMemo.Height = 385;
+            userGivenMemo.Width = 405;
+            userGivenMemo.Margin = new Thickness(105, 125, 5, 5);
             userGivenMemo.Background = new SolidColorBrush(Color.FromArgb(255, 48, 179, 221));
             addMemoEventGrid.Children.Add(userGivenMemo);
+        }
+
+        private void addTimepicker()
+        {
+            TimePicker eventTime = new TimePicker();
+            eventTime.Header = "Event time";
         }
 
         private void removeChildren()
@@ -121,7 +140,8 @@ namespace Calenderp
                 addMemoEventGrid.Children.RemoveAt(0);
             }
 
-            if (datePickerGrid.Children.Count > 0)
+            count = datePickerGrid.Children.Count;
+            for (int i = 0; i < count; i++)
             {
                 datePickerGrid.Children.RemoveAt(0);
             }
@@ -132,6 +152,7 @@ namespace Calenderp
             selectedButton = "Memo";
             removeChildren();
             addCalendarPicker("Memo", selectedYear, selectedMonth, selectedDay);
+            addCalendarPickerText("Memo Date:");
             addTitle("Memo Title:");
             addUserGivenTitle("Memo");
             addDescriptionlabel();
@@ -143,6 +164,7 @@ namespace Calenderp
             selectedButton = "Event";
             removeChildren();
             addCalendarPicker("Event", selectedYear, selectedMonth, selectedDay);
+            addCalendarPickerText("Event Date:");
             addTitle("Event Title:");
             addUserGivenTitle("Event");
         }
