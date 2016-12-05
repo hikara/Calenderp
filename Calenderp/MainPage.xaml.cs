@@ -148,6 +148,19 @@ namespace Calenderp
             datePickerGrid.Children.Add(eventTime);
         }
 
+        private void addSubmitButton(string submissionText)
+        {
+            Button submitButton = new Button();
+            submitButton.Content = submissionText;
+            submitButton.HorizontalAlignment = HorizontalAlignment.Center;
+            submitButton.VerticalAlignment = VerticalAlignment.Bottom;
+            submitButton.Margin = new Thickness(5, 5, 5, 5);
+            submitButton.Height = 32;
+            submitButton.Width = 130;
+            submitButton.Background = new SolidColorBrush(Color.FromArgb(255, 165, 226, 224));
+            addMemoEventGrid.Children.Add(submitButton);
+        }
+
         private void removeChildren(Grid grid)
         {
             int count = grid.Children.Count();
@@ -168,6 +181,7 @@ namespace Calenderp
             addUserGivenTitle("Memo");
             addDescriptionlabel();
             addUserGivenMemo();
+            addSubmitButton("Submit Memo");
         }
 
         private void addEvent_Click(object sender, RoutedEventArgs e)
@@ -181,6 +195,7 @@ namespace Calenderp
             addUserGivenTitle("Event");
             addTimepicker();
             addTimePickerText();
+            addSubmitButton("Submit Event");
         }
 
         private void calenderpCalendarView_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
