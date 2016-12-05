@@ -202,11 +202,6 @@ namespace Calenderp
             dateSelectedGrid.Children.Add(descriptionLabel3);
         }
 
-        private void submitButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void removeChildren(Grid grid)
         {
             int count = grid.Children.Count();
