@@ -31,6 +31,7 @@ namespace Calenderp
         public string selectedButton = "";
         private string userSubmittedTitle = "No Title Submitted";
         private string userSubmittedMemoText = "No Memo Submitted";
+        private string userSubmittedTime = "No Time Submitted";
         public MainPage()
         {
             this.InitializeComponent();
@@ -163,6 +164,13 @@ namespace Calenderp
             eventTime.FontSize = 16;
             eventTime.Margin = new Thickness(315, 5, 5, 5);
             datePickerGrid.Children.Add(eventTime);
+            eventTime.TimeChanged += eventTime_TimeChanged;
+        }
+
+        private void eventTime_TimeChanged(object sender, TimePickerValueChangedEventArgs e)
+        {
+            TimePicker time = (TimePicker)sender;
+            userSubmittedTime = time.Time.ToString();
         }
 
         private void addSubmitButton(string submissionText)
@@ -196,6 +204,18 @@ namespace Calenderp
             {
                 TextBlock descriptionLabel3 = new TextBlock();
                 descriptionLabel3.Text = userSubmittedMemoText;
+                descriptionLabel3.HorizontalAlignment = HorizontalAlignment.Left;
+                descriptionLabel3.VerticalAlignment = VerticalAlignment.Top;
+                descriptionLabel3.FontSize = 16;
+                descriptionLabel3.Height = 30;
+                descriptionLabel3.Width = 405;
+                descriptionLabel3.Margin = new Thickness(5, 225, 5, 5);
+                dateSelectedGrid.Children.Add(descriptionLabel3);
+            }
+            else
+            {
+                TextBlock descriptionLabel3 = new TextBlock();
+                descriptionLabel3.Text = userSubmittedTime;
                 descriptionLabel3.HorizontalAlignment = HorizontalAlignment.Left;
                 descriptionLabel3.VerticalAlignment = VerticalAlignment.Top;
                 descriptionLabel3.FontSize = 16;
