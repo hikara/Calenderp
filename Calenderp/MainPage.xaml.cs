@@ -50,11 +50,10 @@ namespace Calenderp
             datePickerGrid.Children.Add(calendarPickerText);
         }
 
-        private void addCalendarPicker(string headerType, int year, int month, int day)
+        private void addCalendarPicker(int year, int month, int day)
         {
             CalendarDatePicker addMemoEventCalendar = new CalendarDatePicker();
             addMemoEventCalendar.Date = new DateTime(year, month, day);
-            //addMemoEventCalendar.Header = headerType + " date";
             addMemoEventCalendar.HorizontalAlignment = HorizontalAlignment.Left;
             addMemoEventCalendar.VerticalAlignment = VerticalAlignment.Top;
             addMemoEventCalendar.Margin = new Thickness(105, 5, 5, 5);
@@ -129,29 +128,26 @@ namespace Calenderp
         private void addTimepicker()
         {
             TimePicker eventTime = new TimePicker();
-            eventTime.Header = "Event time";
+            eventTime.HorizontalAlignment = HorizontalAlignment.Left;
+            eventTime.VerticalAlignment = VerticalAlignment.Top;
+            eventTime.Margin = new Thickness(305, 125, 5, 5);
         }
 
-        private void removeChildren()
+        private void removeChildren(Grid grid)
         {
-            int count = addMemoEventGrid.Children.Count();
+            int count = grid.Children.Count();
             for (int i = 0; i < count; i++)
             {
-                addMemoEventGrid.Children.RemoveAt(0);
-            }
-
-            count = datePickerGrid.Children.Count;
-            for (int i = 0; i < count; i++)
-            {
-                datePickerGrid.Children.RemoveAt(0);
+                grid.Children.RemoveAt(0);
             }
         }
 
         private void addMemo_Click(object sender, RoutedEventArgs e)
         {
             selectedButton = "Memo";
-            removeChildren();
-            addCalendarPicker("Memo", selectedYear, selectedMonth, selectedDay);
+            removeChildren(addMemoEventGrid);
+            removeChildren(datePickerGrid);
+            addCalendarPicker(selectedYear, selectedMonth, selectedDay);
             addCalendarPickerText("Memo Date:");
             addTitle("Memo Title:");
             addUserGivenTitle("Memo");
@@ -162,8 +158,9 @@ namespace Calenderp
         private void addEvent_Click(object sender, RoutedEventArgs e)
         {
             selectedButton = "Event";
-            removeChildren();
-            addCalendarPicker("Event", selectedYear, selectedMonth, selectedDay);
+            removeChildren(addMemoEventGrid);
+            removeChildren(datePickerGrid);
+            addCalendarPicker(selectedYear, selectedMonth, selectedDay);
             addCalendarPickerText("Event Date:");
             addTitle("Event Title:");
             addUserGivenTitle("Event");
@@ -178,8 +175,9 @@ namespace Calenderp
             //}
             if (datePickerGrid.Children.Count > 0)
             {
-                datePickerGrid.Children.RemoveAt(0);
-                addCalendarPicker(selectedButton, selectedYear, selectedMonth, selectedDay);
+                removeChildren(datePickerGrid);
+                addCalendarPicker(selectedYear, selectedMonth, selectedDay);
+                addCalendarPickerText(selectedButton + " Date:");
             }
             
             IList<DateTimeOffset> dates = calenderpCalendarView.SelectedDates;
