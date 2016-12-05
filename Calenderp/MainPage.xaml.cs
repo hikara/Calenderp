@@ -190,11 +190,13 @@ namespace Calenderp
 
         private void aboutButton_Click(object sender, RoutedEventArgs e)
         {
+            //Save State
             this.Frame.Navigate(typeof(AboutPage));
         }
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
+            //Save State
             this.Frame.Navigate(typeof(SettingsPage));
         }
     }
