@@ -32,7 +32,11 @@ namespace Calenderp
         private string userSubmittedTitle = "No Title Submitted";
         private string userSubmittedMemoText = "No Memo Submitted";
         private string userSubmittedTime = "No Time Submitted";
-        private string userSubmitterDate = "No Date Submitted";
+        private string userSubmittedDate = "No Date Submitted";
+        private CalendarMemo currentMemo;
+        private CalendarEvent currentEvent;
+        private List<CalendarMemo> memoList = new List<CalendarMemo>();
+        private List<CalendarEvent> eventList = new List<CalendarEvent>();
         public MainPage()
         {
             this.InitializeComponent();
@@ -67,8 +71,8 @@ namespace Calenderp
 
         private void addMemoEventCalendar_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
         {
-            CalendarDatePicker cal = (CalendarDatePicker)sender;
-            userSubmitterDate = cal.Date.ToString();
+            CalendarDatePicker calendarDate = (CalendarDatePicker)sender;
+            userSubmittedDate = calendarDate.Date.ToString();
         }
 
         private void setSelectedDate(string selectedDate)
@@ -195,53 +199,52 @@ namespace Calenderp
             submitButton.Click += submitButton_Click;
         }
 
-        private void submitButton_Click(object sender, RoutedEventArgs e)
+        private void addMemoToMemoList()
         {
-            
-            //Save Title etc....
-            TextBlock descriptionLabel2 = new TextBlock();
-            descriptionLabel2.Text = userSubmittedTitle;
-            descriptionLabel2.HorizontalAlignment = HorizontalAlignment.Left;
-            descriptionLabel2.VerticalAlignment = VerticalAlignment.Top;
-            descriptionLabel2.FontSize = 16;
-            descriptionLabel2.Height = 30;
-            descriptionLabel2.Width = 405;
-            descriptionLabel2.Margin = new Thickness(5, 125, 5, 5);
-            dateSelectedGrid.Children.Add(descriptionLabel2);
-
-            if (selectedButton == "Memo")
+            if (userSubmittedTitle != "No Title Submitted" 
+                && userSubmittedMemoText != "No Memo Submitted" 
+                && userSubmittedDate != "No Date Submitted")
             {
-                TextBlock descriptionLabel3 = new TextBlock();
-                descriptionLabel3.Text = userSubmittedMemoText;
-                descriptionLabel3.HorizontalAlignment = HorizontalAlignment.Left;
-                descriptionLabel3.VerticalAlignment = VerticalAlignment.Top;
-                descriptionLabel3.FontSize = 16;
-                descriptionLabel3.Height = 30;
-                descriptionLabel3.Width = 405;
-                descriptionLabel3.Margin = new Thickness(5, 225, 5, 5);
-                dateSelectedGrid.Children.Add(descriptionLabel3);
+                currentMemo = new CalendarMemo(selectedDay, selectedMonth, selectedYear, userSubmittedTitle, userSubmittedMemoText);
+                userSubmittedTitle = "No Title Submitted";
+                userSubmittedMemoText = "No Memo Submitted";
+                userSubmittedDate = "No Date Submitted";
+                memoList.Add(currentMemo);
             }
             else
             {
-                TextBlock descriptionLabel3 = new TextBlock();
-                descriptionLabel3.Text = userSubmittedTime;
-                descriptionLabel3.HorizontalAlignment = HorizontalAlignment.Left;
-                descriptionLabel3.VerticalAlignment = VerticalAlignment.Top;
-                descriptionLabel3.FontSize = 16;
-                descriptionLabel3.Height = 30;
-                descriptionLabel3.Width = 405;
-                descriptionLabel3.Margin = new Thickness(5, 225, 5, 5);
-                dateSelectedGrid.Children.Add(descriptionLabel3);
+                //rejection messagebox or something
             }
-            TextBlock descriptionLabel4 = new TextBlock();
-            descriptionLabel4.Text = userSubmitterDate;
-            descriptionLabel4.HorizontalAlignment = HorizontalAlignment.Left;
-            descriptionLabel4.VerticalAlignment = VerticalAlignment.Top;
-            descriptionLabel4.FontSize = 16;
-            descriptionLabel4.Height = 30;
-            descriptionLabel4.Width = 405;
-            descriptionLabel4.Margin = new Thickness(5, 195, 5, 5);
-            dateSelectedGrid.Children.Add(descriptionLabel4);
+        }
+
+        private void addEventToEventList()
+        {
+            if (userSubmittedTitle != "No Title Submitted"
+                && userSubmittedTime != "No Time Submitted"
+                && userSubmittedDate != "No Date Submitted")
+            {
+                currentEvent = new CalendarEvent(selectedDay, selectedMonth, selectedYear, userSubmittedTime, userSubmittedMemoText);
+                userSubmittedTitle = "No Title Submitted";
+                userSubmittedTime = "No Time Submitted";
+                userSubmittedDate = "No Date Submitted";
+                eventList.Add(currentEvent);
+            }
+            else
+            {
+                //rejection messagebox or something
+            }
+        }
+
+        private void submitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedButton == "Memo")
+            {
+                addMemoToMemoList();
+            }
+            else
+            {
+                addEventToEventList();
+            }
         }
 
         private void removeChildren(Grid grid)
@@ -300,9 +303,10 @@ namespace Calenderp
         {            
             foreach (DateTimeOffset date in sender.SelectedDates)
             {
-                string selectedDate = date.ToString();
-                setSelectedDate(selectedDate);
+                string currentSubmittedDate = date.ToString();
+                setSelectedDate(currentSubmittedDate);
                 setDatePicker();
+
             }
         }
 
@@ -317,5 +321,42 @@ namespace Calenderp
             //Save State
             this.Frame.Navigate(typeof(SettingsPage));
         }
+    }
+
+    public class CalendarEvent
+    {
+        public CalendarEvent(int submittedDay, int submittedMonth, int submittedYear, string submittedTime, string submittedEventTitle)
+        {
+            day = submittedDay;
+            month = submittedMonth;
+            year = submittedYear;
+            time = submittedTime;
+            eventTitle = submittedEventTitle;
+        }
+
+        int day;
+        int month;
+        int year;
+        string time;
+        string eventTitle;
+        //bool reminder
+    }
+
+    public class CalendarMemo
+    {
+        public CalendarMemo(int submittedDay, int submittedMonth, int submittedYear, string submittedMemoTitle, string submittedMemoDescription)
+        {
+            day = submittedDay;
+            month = submittedMonth;
+            year = submittedYear;
+            memoTitle = submittedMemoTitle;
+            memoDescription = submittedMemoDescription;
+        }
+
+        int day;
+        int month;
+        int year;
+        string memoTitle;
+        string memoDescription;
     }
 }
