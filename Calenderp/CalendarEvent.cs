@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace Calenderp
 {
-    public class CalendarMemo
+    public class CalendarEvent
     {
-        public CalendarMemo(int submittedDay, int submittedMonth, int submittedYear, string submittedMemoTitle, string submittedMemoDescription)
+        public CalendarEvent(int submittedDay, int submittedMonth, int submittedYear, string submittedTime, string submittedEventTitle)
         {
             day = submittedDay;
             month = submittedMonth;
             year = submittedYear;
-            memoTitle = submittedMemoTitle;
-            memoDescription = submittedMemoDescription;
+            time = submittedTime;
+            eventTitle = submittedEventTitle;
         }
 
         int day;
         int month;
         int year;
-        string memoTitle;
-        string memoDescription;
+        string time;
+        string eventTitle;
+        //bool reminder
     }
 }
