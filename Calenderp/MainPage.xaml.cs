@@ -294,10 +294,15 @@ namespace Calenderp
                     addTimePickerText();
                 }
             }
-            foreach (DateTimeOffset date in dates)
+        }
+
+        private void calenderpCalendarView_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
+        {            
+            foreach (DateTimeOffset date in sender.SelectedDates)
             {
                 string selectedDate = date.ToString();
                 setSelectedDate(selectedDate);
+                setDatePicker();
             }
         }
 
