@@ -32,6 +32,7 @@ namespace Calenderp
         private string userSubmittedTitle = "No Title Submitted";
         private string userSubmittedMemoText = "No Memo Submitted";
         private string userSubmittedTime = "No Time Submitted";
+        private string userSubmitterDate = "No Date Submitted";
         public MainPage()
         {
             this.InitializeComponent();
@@ -61,6 +62,13 @@ namespace Calenderp
             addMemoEventCalendar.VerticalAlignment = VerticalAlignment.Top;
             addMemoEventCalendar.Margin = new Thickness(105, 5, 5, 5);
             datePickerGrid.Children.Add(addMemoEventCalendar);
+            addMemoEventCalendar.DateChanged += addMemoEventCalendar_DateChanged;
+        }
+
+        private void addMemoEventCalendar_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            CalendarDatePicker cal = (CalendarDatePicker)sender;
+            userSubmitterDate = cal.Date.ToString();
         }
 
         private void setSelectedDate(string selectedDate)
@@ -189,6 +197,7 @@ namespace Calenderp
 
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
+            
             //Save Title etc....
             TextBlock descriptionLabel2 = new TextBlock();
             descriptionLabel2.Text = userSubmittedTitle;
@@ -224,6 +233,15 @@ namespace Calenderp
                 descriptionLabel3.Margin = new Thickness(5, 225, 5, 5);
                 dateSelectedGrid.Children.Add(descriptionLabel3);
             }
+            TextBlock descriptionLabel4 = new TextBlock();
+            descriptionLabel4.Text = userSubmitterDate;
+            descriptionLabel4.HorizontalAlignment = HorizontalAlignment.Left;
+            descriptionLabel4.VerticalAlignment = VerticalAlignment.Top;
+            descriptionLabel4.FontSize = 16;
+            descriptionLabel4.Height = 30;
+            descriptionLabel4.Width = 405;
+            descriptionLabel4.Margin = new Thickness(5, 195, 5, 5);
+            dateSelectedGrid.Children.Add(descriptionLabel4);
         }
 
         private void removeChildren(Grid grid)
