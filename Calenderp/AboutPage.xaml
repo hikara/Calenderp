@@ -22,6 +22,13 @@
     </Page.BottomAppBar>
 
     <Grid Background="#438987" Name="aboutPageGrid">
+        <TextBlock x:Name="calenDerpAboutTitle" Margin="729,10,0,0" TextWrapping="Wrap" Text="Calenderp" FontSize="90" FontFamily="Lucida Sans" Height="109" VerticalAlignment="Top" HorizontalAlignment="Left" Width="462"/>
+        <TextBlock x:Name="by" Margin="941,129,939,0" TextWrapping="Wrap" Text="By " FontSize="30" FontFamily="Lucida Sans" Height="53" VerticalAlignment="Top"/>
+        <TextBlock x:Name="authors" Margin="729,182,0,0" TextWrapping="Wrap" Text="Ben Cline and John Thompson" FontSize="30" FontFamily="Lucida Sans" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="462"/>
+        <Grid Background="#507f7d" Margin="54,414,1189,336" x:Name="addMemoEventGrid">
+            <TextBlock x:Name="calenDerpAboutTitle_Copy" Margin="10,37,0,0" TextWrapping="Wrap" Text="Calenderp is a Windows Application created so that the user can for add memos and events to specific dates. These memos and events are displayed on the calendar so that the user may easily see what tasks and events they have scheduled." FontSize="24" FontFamily="Lucida Sans" Height="189" VerticalAlignment="Top" HorizontalAlignment="Left" Width="650"/>
+        </Grid>
+        <Image x:Name="aboutImage" Source="aboutCalendar.png" HorizontalAlignment="Left" Height="489" Margin="1156,340,0,0" VerticalAlignment="Top" Width="678"/>
 
     </Grid>
 </Page>
