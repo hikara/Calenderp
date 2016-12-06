@@ -281,13 +281,8 @@ namespace Calenderp
             addSubmitButton("Submit Event");
         }
 
-        private void calenderpCalendarView_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
+        private void setDatePicker()
         {
-            //Debug.WriteLine(args.AddedDates.ToArray());
-            //foreach (DateTimeOffset daa in args.AddedDates.ToArray())
-            //{
-            //    Debug.WriteLine(daa.ToString());
-            //}
             if (datePickerGrid.Children.Count > 0)
             {
                 removeChildren(datePickerGrid);
@@ -299,8 +294,6 @@ namespace Calenderp
                     addTimePickerText();
                 }
             }
-            
-            IList<DateTimeOffset> dates = calenderpCalendarView.SelectedDates;
             foreach (DateTimeOffset date in dates)
             {
                 string selectedDate = date.ToString();
