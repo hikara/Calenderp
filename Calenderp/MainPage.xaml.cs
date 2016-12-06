@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Globalization;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -199,6 +200,12 @@ namespace Calenderp
             submitButton.Click += submitButton_Click;
         }
 
+        private async void showErrorMessage(string message)
+        {
+            var dialog = new MessageDialog(message, "Error");
+            await dialog.ShowAsync();
+        }
+
         private void addMemoToMemoList()
         {
             if (userSubmittedTitle != "No Title Submitted" 
@@ -213,7 +220,7 @@ namespace Calenderp
             }
             else
             {
-                //rejection messagebox or something
+                showErrorMessage("Please select a date, create a memo title, and a memo before submitting your memo.");
             }
         }
 
@@ -231,7 +238,7 @@ namespace Calenderp
             }
             else
             {
-                //rejection messagebox or something
+                showErrorMessage("Please select a date and time and, create a event title before submitting your event.");
             }
         }
 
