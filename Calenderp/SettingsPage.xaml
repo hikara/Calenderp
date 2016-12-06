@@ -22,6 +22,7 @@
     </Page.BottomAppBar>
 
     <Grid Background="#438987" Name="settingsPageGrid">
+        <TextBlock x:Name="settingsTitle" Margin="779,10,781,0" TextWrapping="Wrap" Text="Settings" FontSize="90" FontFamily="Lucida Sans" Height="106" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
