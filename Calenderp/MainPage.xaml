@@ -29,7 +29,7 @@
 
         <Grid Background="#507f7d" Margin="75,182,1185,444" Name="addMemoEventGrid">
         </Grid>
-        <Grid Background="#507f7d" Margin="75,182,1185,700" Name="datePickerGrid"></Grid>
+        <Grid Background="#507f7d" Margin="75,182,1185,717" Name="datePickerGrid"></Grid>
         <TextBlock x:Name="calenDerpTitle" HorizontalAlignment="Left" Margin="75,33,0,0" TextWrapping="Wrap" Text="Calenderp" VerticalAlignment="Top" Height="83" Width="601" FontSize="60" FontFamily="Lucida Sans"/>
         <Grid Background="#507f7d" Margin="75,601,1185,79" Name="dateSelectedGrid"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="75,550,0,0" TextWrapping="Wrap" Text="Currently Selected Date:" VerticalAlignment="Top" Height="46" Width="364" FontFamily="Lucida Sans" FontSize="30"/>
