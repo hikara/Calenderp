@@ -56,6 +56,7 @@ namespace Calenderp
 
                 memoList = JsonConvert.DeserializeObject<List<CalendarMemo>>(restoredData[0]);
                 eventList = JsonConvert.DeserializeObject<List<CalendarEvent>>(restoredData[1]);
+                generateDateSelectedTextBlocks();
             }
             else
             {
@@ -68,7 +69,7 @@ namespace Calenderp
             }
         }
 
-        private List<List<string>> generateDateSelectedStringsEvents()
+        private List<List<string>> generateEvents()
         {
             List<List<string>> returnValue = new List<List<string>>();
 
@@ -86,7 +87,7 @@ namespace Calenderp
             return returnValue;
         }
 
-        private List<List<string>> generateDateSelectedStringsMemos()
+        private List<List<string>> generateMemos()
         {
             List<List<string>> returnValue = new List<List<string>>();
 
@@ -106,7 +107,7 @@ namespace Calenderp
 
         private void generateDateSelectedTextBlocks()
         {
-            List<List<string>> info = generateDateSelectedStringsEvents();
+            List<List<string>> info = generateEvents();
             AllMemos.Text = "";
             AllEvents.Text = "";
 
@@ -118,7 +119,7 @@ namespace Calenderp
                 AllEvents.Text += "Year: " + lst[2] + "\n";
                 AllEvents.Text += "Time: " + lst[4] + "\n\n";
             }
-            info = generateDateSelectedStringsMemos();
+            info = generateMemos();
             foreach (List<string> lst in info)
             {
                 AllMemos.Text += "Title: " + lst[3] + "\n";
