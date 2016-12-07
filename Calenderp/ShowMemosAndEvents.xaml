@@ -22,7 +22,8 @@
     </Page.BottomAppBar>
 
     <Grid Background="#438987" Name="settingsPageGrid">
-        <TextBlock x:Name="settingsTitle" Margin="779,10,781,0" TextWrapping="Wrap" Text="Settings" FontSize="90" FontFamily="Lucida Sans" Height="106" VerticalAlignment="Top"/>
-
+        <TextBlock x:Name="settingsTitle" TextAlignment="Center" Margin="350,10,350,0" TextWrapping="Wrap" Text="All Memos and Events" FontSize="90" FontFamily="Lucida Sans" Height="106" VerticalAlignment="Top"/>
+        <Grid x:Name="MemoGrid" Background="#507f7d" Margin="10,150,966,63"/>
+        <Grid x:Name="EventGrid" Background="#507f7d" Margin="966,150,10,63"/>
     </Grid>
 </Page>
