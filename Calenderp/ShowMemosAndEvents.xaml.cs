@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -46,14 +47,26 @@ namespace Calenderp
 
         protected override void OnNavigatedTo(NavigationEventArgs args)
         {
-            // Page was navigated to
-            List<string> fkdjnsljkn = JsonConvert.DeserializeObject<List<string>>(args.Parameter as string);
+            // Restore state
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey("data"))
+            {
+                string res = ApplicationData.Current.LocalSettings.Values["data"] as string;
+
+                List<string> restoredData = JsonConvert.DeserializeObject<List<string>>(res);
+
+                memoList = JsonConvert.DeserializeObject<List<CalendarMemo>>(restoredData[0]);
+                eventList = JsonConvert.DeserializeObject<List<CalendarEvent>>(restoredData[1]);
+            }
+            else
+            {
+                // Page was navigated to
+                List<string> fkdjnsljkn = JsonConvert.DeserializeObject<List<string>>(args.Parameter as string);
 
 
 
-            memoList = JsonConvert.DeserializeObject<List<CalendarMemo>>(fkdjnsljkn[0]);
-            eventList = JsonConvert.DeserializeObject<List<CalendarEvent>>(fkdjnsljkn[1]);
-            var hi = 0;
+                memoList = JsonConvert.DeserializeObject<List<CalendarMemo>>(fkdjnsljkn[0]);
+                eventList = JsonConvert.DeserializeObject<List<CalendarEvent>>(fkdjnsljkn[1]);
+            }
         }
     }
 }

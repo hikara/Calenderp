@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Globalization;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
+using Windows.Storage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -37,8 +38,8 @@ namespace Calenderp
         private string userSubmittedDate = "No Date Submitted";
         private CalendarMemo currentMemo;
         private CalendarEvent currentEvent;
-        private List<CalendarMemo> memoList = new List<CalendarMemo>();
-        private List<CalendarEvent> eventList = new List<CalendarEvent>();
+        public List<CalendarMemo> memoList = new List<CalendarMemo>();
+        public List<CalendarEvent> eventList = new List<CalendarEvent>();
 
         public MainPage()
         {
@@ -421,6 +422,35 @@ namespace Calenderp
             string str = JsonConvert.SerializeObject(input);
 
             this.Frame.Navigate(typeof(ShowMemosAndEvents), str);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Restore state
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey("data"))
+            {
+                string res = ApplicationData.Current.LocalSettings.Values["data"] as string;
+
+                List<string> restoredData = JsonConvert.DeserializeObject<List<string>>(res);
+
+                memoList = JsonConvert.DeserializeObject<List<CalendarMemo>>(restoredData[0]);
+                eventList = JsonConvert.DeserializeObject<List<CalendarEvent>>(restoredData[1]);
+            }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            // Save state in case app is terminated later
+            string memos = JsonConvert.SerializeObject(memoList);
+            string events = JsonConvert.SerializeObject(eventList);
+
+            List<string> input = new List<string>();
+
+            input.Add(memos);
+            input.Add(events);
+
+            string str = JsonConvert.SerializeObject(input);
+            ApplicationData.Current.LocalSettings.Values["data"] = str;
         }
     }
 }
