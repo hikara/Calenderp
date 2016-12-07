@@ -17,10 +17,10 @@ namespace Calenderp
             memoDescription = submittedMemoDescription;
         }
 
-        int day;
-        int month;
-        int year;
-        string memoTitle;
-        string memoDescription;
+        public int day;
+        public int month;
+        public int year;
+        public string memoTitle;
+        public string memoDescription;
     }
 }

@@ -38,9 +38,11 @@ namespace Calenderp
         private CalendarEvent currentEvent;
         private List<CalendarMemo> memoList = new List<CalendarMemo>();
         private List<CalendarEvent> eventList = new List<CalendarEvent>();
+
         public MainPage()
         {
             this.InitializeComponent();
+
             DateTime localDate = DateTime.Now;
             var culture = new CultureInfo("en-US");
             setSelectedDate(localDate.ToString(culture));
@@ -74,6 +76,7 @@ namespace Calenderp
         {
             CalendarDatePicker calendarDate = (CalendarDatePicker)sender;
             userSubmittedDate = calendarDate.Date.ToString();
+            setSelectedDate(userSubmittedDate);
         }
 
         private void setSelectedDate(string selectedDate)
@@ -208,49 +211,42 @@ namespace Calenderp
 
         private void addMemoToMemoList()
         {
-            if (userSubmittedTitle != "No Title Submitted" 
-                && userSubmittedMemoText != "No Memo Submitted" 
-                && userSubmittedDate != "No Date Submitted")
-            {
-                currentMemo = new CalendarMemo(selectedDay, selectedMonth, selectedYear, userSubmittedTitle, userSubmittedMemoText);
-                userSubmittedTitle = "No Title Submitted";
-                userSubmittedMemoText = "No Memo Submitted";
-                userSubmittedDate = "No Date Submitted";
-                memoList.Add(currentMemo);
-            }
-            else
-            {
-                showErrorMessage("Please select a date, create a memo title, and a memo before submitting your memo.");
-            }
+            currentMemo = new CalendarMemo(selectedDay, selectedMonth, selectedYear, userSubmittedTitle, userSubmittedMemoText);
+            memoList.Add(currentMemo);
         }
 
         private void addEventToEventList()
         {
-            if (userSubmittedTitle != "No Title Submitted"
-                && userSubmittedTime != "No Time Submitted"
-                && userSubmittedDate != "No Date Submitted")
-            {
-                currentEvent = new CalendarEvent(selectedDay, selectedMonth, selectedYear, userSubmittedTime, userSubmittedMemoText);
-                userSubmittedTitle = "No Title Submitted";
-                userSubmittedTime = "No Time Submitted";
-                userSubmittedDate = "No Date Submitted";
-                eventList.Add(currentEvent);
-            }
-            else
-            {
-                showErrorMessage("Please select a date and time and, create a event title before submitting your event.");
-            }
+            currentEvent = new CalendarEvent(selectedDay, selectedMonth, selectedYear, userSubmittedTime, userSubmittedTitle);
+            eventList.Add(currentEvent);
+        }
+
+        private void addResponse(string response)
+        {
+            TextBlock responseText = new TextBlock();
+            responseText.Text = response;
+            responseText.HorizontalAlignment = HorizontalAlignment.Left;
+            responseText.VerticalAlignment = VerticalAlignment.Top;
+            responseText.FontSize = 16;
+            responseText.Height = 30;
+            responseText.Width = 405;
+            responseText.Margin = new Thickness(5, 75, 5, 5);
+            addMemoEventGrid.Children.Add(responseText);
         }
 
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
+            removeChildren(addMemoEventGrid);
+            removeChildren(datePickerGrid);
             if (selectedButton == "Memo")
             {
                 addMemoToMemoList();
+                addResponse("Memo successfully submitted.");
             }
             else
             {
                 addEventToEventList();
+                addResponse("Event successfully submitted.");
             }
         }
 
@@ -306,15 +302,85 @@ namespace Calenderp
             }
         }
 
+        private List<List<string>> generateDateSelectedStringsEvents()
+        {
+            List<List<string>> returnValue = new List<List<string>>();
+
+            foreach (CalendarEvent ev in eventList)
+            {
+                List<string> list = new List<string>();
+                list.Add(ev.day.ToString());
+                list.Add(ev.month.ToString());
+                list.Add(ev.year.ToString());
+                list.Add(ev.eventTitle);
+                list.Add(ev.time);
+                returnValue.Add(list);
+            }
+
+            return returnValue;
+        }
+
+        private List<List<string>> generateDateSelectedStringsMemos()
+        {
+            List<List<string>> returnValue = new List<List<string>>();
+
+            foreach (CalendarMemo mem in memoList)
+            {
+                List<string> list = new List<string>();
+                list.Add(mem.day.ToString());
+                list.Add(mem.month.ToString());
+                list.Add(mem.year.ToString());
+                list.Add(mem.memoTitle);
+                list.Add(mem.memoDescription);
+                returnValue.Add(list);
+            }
+
+            return returnValue;
+        }
+
+        private void generateDateSelectedTextBlocks()
+        {
+            List<List<string>> info = generateDateSelectedStringsEvents();
+            selectedDateMemosAndEvents.Text = "";
+            foreach (List<string> lst in info)
+            {
+                if (selectedYear == Convert.ToInt32(lst[2]) && selectedMonth == Convert.ToInt32(lst[1]) && selectedDay == Convert.ToInt32(lst[0]))
+                {
+                    selectedDateMemosAndEvents.Text += "Title: " + lst[3] + "\n";
+                    selectedDateMemosAndEvents.Text += "Day: " + lst[0] + "\n";
+                    selectedDateMemosAndEvents.Text += "Month: " + lst[1] + "\n";
+                    selectedDateMemosAndEvents.Text += "Year: " + lst[2] + "\n";
+                    selectedDateMemosAndEvents.Text += "Time: " + lst[4] + "\n\n";
+                }
+            }
+            info = generateDateSelectedStringsMemos();
+            foreach (List<string> lst in info)
+            {
+                if (selectedYear == Convert.ToInt32(lst[2]) && selectedMonth == Convert.ToInt32(lst[1]) && selectedDay == Convert.ToInt32(lst[0]))
+                {
+                    selectedDateMemosAndEvents.Text += "Title: " + lst[3] + "\n";
+                    selectedDateMemosAndEvents.Text += "Day: " + lst[0] + "\n";
+                    selectedDateMemosAndEvents.Text += "Month: " + lst[1] + "\n";
+                    selectedDateMemosAndEvents.Text += "Year: " + lst[2] + "\n";
+                    selectedDateMemosAndEvents.Text += "Description: " + lst[4] + "\n\n";
+                }
+            }
+            if (selectedDateMemosAndEvents.Text == "")
+            {
+                selectedDateMemosAndEvents.Text = "There are no events or memos for the selected date.";
+            }
+        }
+
         private void calenderpCalendarView_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
-        {            
+        {
             foreach (DateTimeOffset date in sender.SelectedDates)
             {
                 string currentSubmittedDate = date.ToString();
                 setSelectedDate(currentSubmittedDate);
+                userSubmittedDate = date.ToString();
                 setDatePicker();
-
             }
+            generateDateSelectedTextBlocks();
         }
 
         private void aboutButton_Click(object sender, RoutedEventArgs e)

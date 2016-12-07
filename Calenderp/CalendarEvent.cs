@@ -17,11 +17,11 @@ namespace Calenderp
             eventTitle = submittedEventTitle;
         }
 
-        int day;
-        int month;
-        int year;
-        string time;
-        string eventTitle;
+        public int day;
+        public int month;
+        public int year;
+        public string time;
+        public string eventTitle;
         //bool reminder
     }
 }
