@@ -60,12 +60,81 @@ namespace Calenderp
             else
             {
                 // Page was navigated to
-                List<string> fkdjnsljkn = JsonConvert.DeserializeObject<List<string>>(args.Parameter as string);
 
+                List<string> outputObject = JsonConvert.DeserializeObject<List<string>>(args.Parameter as string);
+                memoList = JsonConvert.DeserializeObject<List<CalendarMemo>>(outputObject[0]);
+                eventList = JsonConvert.DeserializeObject<List<CalendarEvent>>(outputObject[1]);
+                generateDateSelectedTextBlocks();
+            }
+        }
 
+        private List<List<string>> generateDateSelectedStringsEvents()
+        {
+            List<List<string>> returnValue = new List<List<string>>();
 
-                memoList = JsonConvert.DeserializeObject<List<CalendarMemo>>(fkdjnsljkn[0]);
-                eventList = JsonConvert.DeserializeObject<List<CalendarEvent>>(fkdjnsljkn[1]);
+            foreach (CalendarEvent ev in eventList)
+            {
+                List<string> list = new List<string>();
+                list.Add(ev.day.ToString());
+                list.Add(ev.month.ToString());
+                list.Add(ev.year.ToString());
+                list.Add(ev.eventTitle);
+                list.Add(ev.time);
+                returnValue.Add(list);
+            }
+
+            return returnValue;
+        }
+
+        private List<List<string>> generateDateSelectedStringsMemos()
+        {
+            List<List<string>> returnValue = new List<List<string>>();
+
+            foreach (CalendarMemo mem in memoList)
+            {
+                List<string> list = new List<string>();
+                list.Add(mem.day.ToString());
+                list.Add(mem.month.ToString());
+                list.Add(mem.year.ToString());
+                list.Add(mem.memoTitle);
+                list.Add(mem.memoDescription);
+                returnValue.Add(list);
+            }
+
+            return returnValue;
+        }
+
+        private void generateDateSelectedTextBlocks()
+        {
+            List<List<string>> info = generateDateSelectedStringsEvents();
+            AllMemos.Text = "";
+            AllEvents.Text = "";
+
+            foreach (List<string> lst in info)
+            {
+                AllEvents.Text += "Title: " + lst[3] + "\n";
+                AllEvents.Text += "Day: " + lst[0] + "\n";
+                AllEvents.Text += "Month: " + lst[1] + "\n";
+                AllEvents.Text += "Year: " + lst[2] + "\n";
+                AllEvents.Text += "Time: " + lst[4] + "\n\n";
+            }
+            info = generateDateSelectedStringsMemos();
+            foreach (List<string> lst in info)
+            {
+                AllMemos.Text += "Title: " + lst[3] + "\n";
+                AllMemos.Text += "Day: " + lst[0] + "\n";
+                AllMemos.Text += "Month: " + lst[1] + "\n";
+                AllMemos.Text += "Year: " + lst[2] + "\n";
+                AllMemos.Text += "Description: " + lst[4] + "\n\n";
+            }
+            if (AllMemos.Text == "")
+            {
+                AllMemos.Text = "You have no memos.";
+            }
+
+            if (AllEvents.Text == "")
+            {
+                AllEvents.Text = "You have no events.";
             }
         }
     }
