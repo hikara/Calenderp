@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,11 +21,17 @@ namespace Calenderp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SettingsPage : Page
+    public sealed partial class ShowMemosAndEvents : Page
     {
-        public SettingsPage()
+        private List<CalendarMemo> memoList;
+        private List<CalendarEvent> eventList;
+
+        public ShowMemosAndEvents()
         {
             this.InitializeComponent();
+
+            memoList = new List<CalendarMemo>();
+            eventList = new List<CalendarEvent>();
         }
 
         private void aboutButton_Click(object sender, RoutedEventArgs e)
@@ -35,6 +42,18 @@ namespace Calenderp
         private void calendarButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs args)
+        {
+            // Page was navigated to
+            List<string> fkdjnsljkn = JsonConvert.DeserializeObject<List<string>>(args.Parameter as string);
+
+
+
+            memoList = JsonConvert.DeserializeObject<List<CalendarMemo>>(fkdjnsljkn[0]);
+            eventList = JsonConvert.DeserializeObject<List<CalendarEvent>>(fkdjnsljkn[1]);
+            var hi = 0;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Calenderp
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SettingsPage));
+            this.Frame.Navigate(typeof(ShowMemosAndEvents));
         }
 
         private void calendarButton_Click(object sender, RoutedEventArgs e)

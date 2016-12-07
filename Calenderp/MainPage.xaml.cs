@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Globalization;
 using Windows.UI.Popups;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -42,7 +43,7 @@ namespace Calenderp
         public MainPage()
         {
             this.InitializeComponent();
-
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
             DateTime localDate = DateTime.Now;
             var culture = new CultureInfo("en-US");
             setSelectedDate(localDate.ToString(culture));
@@ -371,6 +372,14 @@ namespace Calenderp
             }
         }
 
+        //private void calenderpCalendarView_OnCalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs args)
+        //{
+        //    CalendarViewDayItem localItem = args.Item;
+        //    if (localItem == null || args.InRecycleQueue || localItem.DataContext != null) return;
+
+        //    //localItem.DataContext = sender.;
+        //}
+
         private void calenderpCalendarView_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
         {
             foreach (DateTimeOffset date in sender.SelectedDates)
@@ -391,8 +400,17 @@ namespace Calenderp
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
-            //Save State
-            this.Frame.Navigate(typeof(SettingsPage));
+            string memos = JsonConvert.SerializeObject(memoList);
+            string events = JsonConvert.SerializeObject(eventList);
+
+            List <string> input = new List<string>();
+
+            input.Add(memos);
+            input.Add(events);
+
+            string str = JsonConvert.SerializeObject(input);
+
+            this.Frame.Navigate(typeof(ShowMemosAndEvents), str);
         }
     }
 }
