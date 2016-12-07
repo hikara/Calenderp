@@ -358,10 +358,9 @@ namespace Calenderp
             {
                 if (selectedYear == Convert.ToInt32(lst[2]) && selectedMonth == Convert.ToInt32(lst[1]) && selectedDay == Convert.ToInt32(lst[0]))
                 {
+                    selectedDateMemosAndEvents.Text += "EVENT" + "\n";
                     selectedDateMemosAndEvents.Text += "Title: " + lst[3] + "\n";
-                    selectedDateMemosAndEvents.Text += "Day: " + lst[0] + "\n";
-                    selectedDateMemosAndEvents.Text += "Month: " + lst[1] + "\n";
-                    selectedDateMemosAndEvents.Text += "Year: " + lst[2] + "\n";
+                    selectedDateMemosAndEvents.Text += "Date: " + lst[1] + "/" + lst[0] + "/" + lst[2] + "\n";
                     selectedDateMemosAndEvents.Text += "Time: " + lst[4] + "\n\n";
                 }
             }
@@ -370,10 +369,9 @@ namespace Calenderp
             {
                 if (selectedYear == Convert.ToInt32(lst[2]) && selectedMonth == Convert.ToInt32(lst[1]) && selectedDay == Convert.ToInt32(lst[0]))
                 {
+                    selectedDateMemosAndEvents.Text += "MEMO" + "\n";
                     selectedDateMemosAndEvents.Text += "Title: " + lst[3] + "\n";
-                    selectedDateMemosAndEvents.Text += "Day: " + lst[0] + "\n";
-                    selectedDateMemosAndEvents.Text += "Month: " + lst[1] + "\n";
-                    selectedDateMemosAndEvents.Text += "Year: " + lst[2] + "\n";
+                    selectedDateMemosAndEvents.Text += "Date: " + lst[1] + "/" + lst[0] + "/" + lst[2] + "\n";
                     selectedDateMemosAndEvents.Text += "Description: " + lst[4] + "\n\n";
                 }
             }
@@ -409,7 +407,7 @@ namespace Calenderp
             this.Frame.Navigate(typeof(AboutPage));
         }
 
-        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        private void allButton_Click(object sender, RoutedEventArgs e)
         {
             string memos = JsonConvert.SerializeObject(memoList);
             string events = JsonConvert.SerializeObject(eventList);

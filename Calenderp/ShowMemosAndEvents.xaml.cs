@@ -114,18 +114,14 @@ namespace Calenderp
             foreach (List<string> lst in info)
             {
                 AllEvents.Text += "Title: " + lst[3] + "\n";
-                AllEvents.Text += "Day: " + lst[0] + "\n";
-                AllEvents.Text += "Month: " + lst[1] + "\n";
-                AllEvents.Text += "Year: " + lst[2] + "\n";
+                AllEvents.Text += "Date: " + lst[1] + "/" + lst[0] + "/" + lst[2] + "\n";
                 AllEvents.Text += "Time: " + lst[4] + "\n\n";
             }
             info = generateMemos();
             foreach (List<string> lst in info)
             {
                 AllMemos.Text += "Title: " + lst[3] + "\n";
-                AllMemos.Text += "Day: " + lst[0] + "\n";
-                AllMemos.Text += "Month: " + lst[1] + "\n";
-                AllMemos.Text += "Year: " + lst[2] + "\n";
+                AllMemos.Text += "Date: " + lst[1] + "/" + lst[0] + "/" + lst[2] + "\n";
                 AllMemos.Text += "Description: " + lst[4] + "\n\n";
             }
             if (AllMemos.Text == "")

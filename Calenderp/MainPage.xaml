@@ -12,7 +12,7 @@
                 <Grid/>
             </CommandBar.Content>
             <AppBarButton Icon="Calendar" Label="Calendar" Name="calendarButton"/>
-            <AppBarButton Icon="Setting" Label="Customize your layout" Name="settingsButton" Click="settingsButton_Click"/>
+            <AppBarButton Icon="List" Label="View all events and memos" Name="AllButton" Click="allButton_Click"/>
             <AppBarButton Label="About" Name="aboutButton" Click="aboutButton_Click">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="about.png"/>
@@ -21,33 +21,10 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <!--<UserControl.Resources>
-        <Style x:Key="DayColorBlock" TargetType="CalendarViewDayItem" >
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="CalendarViewDayItem">
-                        <ItemsControl ItemsSource="{Binding Colors}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" MinWidth="10">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    --><!--Rectangle Opacity=".6" Margin="0,1" MinHeight="4" Fill="{Binding Converter={StaticResource ColorToBrushConv}}"/--><!--
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>-->
-
 
     <Grid Background="#438987" Name="calendarViewGrid">
         <CalendarView x:Name="calenderpCalendarView" Margin="800,33,0,0" Width="900" VerticalAlignment="Top" Height="900" SelectedDatesChanged="calenderpCalendarView_SelectedDatesChanged"/>
 
-        <!--<CalendarView x:Name="calenderpCalendarView" 
-			SelectedDatesChanged="calenderpCalendarView_SelectedDatesChanged" 
-			CalendarViewDayItemChanging="calenderpCalendarView_OnCalendarViewDayItemChanging" 
-			CalendarViewDayItemStyle="{StaticResource DayColorBlock}">
-        </CalendarView>-->
 
         <Button x:Name="addMemo" Content="Add Memo" HorizontalAlignment="Left" Margin="75,116,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="addMemo_Click" Background="#a5e2e0"/>
         <Button x:Name="addEvent" Content="Add Event" HorizontalAlignment="Left" Margin="238,116,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="addEvent_Click" Background="#a5e2e0" RenderTransformOrigin="0.268,0.409"/>

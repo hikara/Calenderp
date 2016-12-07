@@ -27,7 +27,7 @@ namespace Calenderp
             this.InitializeComponent();
         }
 
-        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        private void allButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(ShowMemosAndEvents));
         }

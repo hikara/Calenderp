@@ -12,7 +12,7 @@
                 <Grid/>
             </CommandBar.Content>
             <AppBarButton Icon="Calendar" Label="Calendar" Name="calendarButton" Click="calendarButton_Click"/>
-            <AppBarButton Icon="Setting" Label="Customize your layout" Name="settingsButton"/>
+            <AppBarButton Icon="List" Label="View all events and memos" Name="AllButton"/>
             <AppBarButton Label="About" Name="aboutButton" Click="aboutButton_Click">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="about.png"/>
