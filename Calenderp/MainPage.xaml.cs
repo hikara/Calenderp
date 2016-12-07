@@ -75,9 +75,19 @@ namespace Calenderp
 
         private void addMemoEventCalendar_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
         {
-            CalendarDatePicker calendarDate = (CalendarDatePicker)sender;
-            userSubmittedDate = calendarDate.Date.ToString();
-            setSelectedDate(userSubmittedDate);
+            if (((CalendarDatePicker)sender).Date.ToString() != "")
+            {
+                CalendarDatePicker calendarDate = (CalendarDatePicker)sender;
+                userSubmittedDate = calendarDate.Date.ToString();
+                setSelectedDate(userSubmittedDate);
+            }
+            else
+            {
+                datePickerGrid.Children.RemoveAt(0);
+                datePickerGrid.Children.RemoveAt(0);
+                addCalendarPickerText(selectedButton + " Date:");
+                addCalendarPicker(selectedYear, selectedMonth, selectedDay);
+            }
         }
 
         private void setSelectedDate(string selectedDate)
