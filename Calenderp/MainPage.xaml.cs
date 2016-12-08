@@ -18,6 +18,9 @@ using System.Globalization;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
 using Windows.Storage;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.UI.Notifications;
+using Microsoft.QueryStringDotNET;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -187,6 +190,7 @@ namespace Calenderp
         private void addTimepicker()
         {
             TimePicker eventTime = new TimePicker();
+            
             eventTime.HorizontalAlignment = HorizontalAlignment.Left;
             eventTime.VerticalAlignment = VerticalAlignment.Top;
             eventTime.FontSize = 16;
@@ -231,6 +235,41 @@ namespace Calenderp
         {
             currentEvent = new CalendarEvent(selectedDay, selectedMonth, selectedYear, userSubmittedTime, userSubmittedTitle);
             eventList.Add(currentEvent);
+
+            // Construct the visuals of the toast
+            ToastVisual visual = new ToastVisual()
+            {
+                BindingGeneric = new ToastBindingGeneric()
+                {
+                    Children =
+                    {
+                        new AdaptiveText()
+                        {
+                            Text = currentEvent.eventTitle
+                        }
+                    }
+                }
+            };
+
+            // Now we can construct the final toast content
+            ToastContent toastContent = new ToastContent()
+            {
+                Visual = visual,
+
+                // Arguments when the user taps body of toast
+                Launch = new QueryString()
+            { }.ToString()
+            };
+
+            string date = selectedMonth.ToString() + "/" + selectedDay.ToString() + "/" + selectedYear + " " + userSubmittedTime;
+            var timer = Convert.ToDateTime(date);
+
+            // And create the toast notification
+            var toast = new ScheduledToastNotification(toastContent.GetXml(), timer);
+
+            // And add it to the schedule
+            ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
+
         }
 
         private void addResponse(string response)
@@ -412,7 +451,7 @@ namespace Calenderp
             string memos = JsonConvert.SerializeObject(memoList);
             string events = JsonConvert.SerializeObject(eventList);
 
-            List <string> input = new List<string>();
+            List<string> input = new List<string>();
 
             input.Add(memos);
             input.Add(events);
