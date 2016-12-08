@@ -190,7 +190,7 @@ namespace Calenderp
         private void addTimepicker()
         {
             TimePicker eventTime = new TimePicker();
-            
+
             eventTime.HorizontalAlignment = HorizontalAlignment.Left;
             eventTime.VerticalAlignment = VerticalAlignment.Top;
             eventTime.FontSize = 16;
@@ -258,7 +258,7 @@ namespace Calenderp
 
                 // Arguments when the user taps body of toast
                 Launch = new QueryString()
-            { }.ToString()
+                { }.ToString()
             };
 
             string date = selectedMonth.ToString() + "/" + selectedDay.ToString() + "/" + selectedYear + " " + userSubmittedTime;
@@ -280,7 +280,7 @@ namespace Calenderp
             responseText.VerticalAlignment = VerticalAlignment.Top;
             responseText.FontSize = 16;
             responseText.Height = 30;
-            responseText.Width = 405;
+            responseText.Width = 605;
             responseText.Margin = new Thickness(5, 75, 5, 5);
             addMemoEventGrid.Children.Add(responseText);
         }
@@ -289,16 +289,22 @@ namespace Calenderp
         {
             removeChildren(addMemoEventGrid);
             removeChildren(datePickerGrid);
-            if (selectedButton == "Memo")
+            if (selectedButton == "Memo" && userSubmittedTitle != "No Title Submitted" && userSubmittedMemoText != "No Memo Submitted")
             {
                 addMemoToMemoList();
                 addResponse("Memo successfully submitted.");
             }
-            else
+            else if (selectedButton == "Event" && userSubmittedTitle != "No Title Submitted")
             {
                 addEventToEventList();
                 addResponse("Event successfully submitted.");
             }
+            else
+            {
+                addResponse("Please enter a title if entering an event, or a title and description if entering a memo.");
+            }
+            userSubmittedTitle = "No Title Submitted";
+            userSubmittedMemoText = "No Memo Submitted";
         }
 
         private void removeChildren(Grid grid)
